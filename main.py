@@ -32,7 +32,7 @@ def main():
         colors = []
         for n, endpoint in enumerate(args.urls):
             try:
-                response = requests.get(endpoint)
+                response = requests.get(endpoint, verify=False)
                 color = "green" if response.status_code == 200 else "red"
             except requests.exceptions.ConnectionError:
                 color = "red"
