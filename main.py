@@ -11,8 +11,7 @@ def main():
     parser = argparse.ArgumentParser(description='Process some integers.')
     parser.add_argument('urls', type=str, nargs='+',
                         help='The endpoints to check')
-    parser.add_argument('--interval_in_s', 
-                        default=5, type=int,
+    parser.add_argument('--interval_in_s', default=10, type=int,
                         help='The seconds between each batch of requests to wait')
     args = parser.parse_args()
     fig, ax = plt.subplots()
