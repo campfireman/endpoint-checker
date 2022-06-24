@@ -6,17 +6,19 @@ import numpy as np
 import requests
 import argparse
 
+SPACING=0.05
+
 
 def main():
     parser = argparse.ArgumentParser(description='Process some integers.')
     parser.add_argument('urls', type=str, nargs='+',
                         help='The endpoints to check')
-    parser.add_argument('--interval_in_s', default=10, type=int,
+    parser.add_argument('--interval_in_s', default=5, type=int,
                         help='The seconds between each batch of requests to wait')
     args = parser.parse_args()
     fig, ax = plt.subplots()
     ax.set_yticklabels(args.urls)
-    ax.set_yticks(np.arange(0.5, len(args.urls), 1))
+    ax.set_yticks(np.arange(0.5, len(args.urls), 1 + SPACING))
 
     timestamps = []
     x = [0]
@@ -35,7 +37,7 @@ def main():
                 color = "green" if response.status_code == 200 else "red"
             except requests.exceptions.ConnectionError:
                 color = "red"
-            plt.bar(i, 1, bottom=n, color=color, align='edge')
+            plt.bar(i, 1, bottom=n + ((n & 1) * SPACING), color=color, align='edge')
             colors.append(color)
 
         print(time + "," + ",".join(colors))
