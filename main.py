@@ -37,7 +37,7 @@ def main():
                 color = "green" if response.status_code == 200 else "red"
             except requests.exceptions.ConnectionError:
                 color = "red"
-            plt.bar(i, 1, bottom=n + ((n & 1) * SPACING), color=color, align='edge')
+            plt.bar(i, 1, bottom=n, color=color, align='edge')
             colors.append(color)
 
         print(time + "," + ",".join(colors))
